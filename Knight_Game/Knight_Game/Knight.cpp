@@ -10,6 +10,9 @@ Knight::Knight() {
 		}
 	}
 }
+int Knight::heuristic(int **state) {
+
+}
 void Knight::to_string() {
 	for (int i = 0; i < 16; i++) {
 		for (int j = 0; j < 16; j++) {
