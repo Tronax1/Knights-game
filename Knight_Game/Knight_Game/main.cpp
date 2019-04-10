@@ -7,8 +7,8 @@ using namespace std;
 
 int main() {
 	ifstream myFile;
-	Knight game;
-	UI display;
+	Knight back_end;
+	UI front_end;
 	bool playing = true;
 	int player_move, AI_move;
 	myFile.open("Vertices.txt");
@@ -19,22 +19,29 @@ int main() {
 	}
 	while (myFile>>vertex_one) {
 		myFile >> vertex_two;
-		game.add_edge(vertex_one, vertex_two);
+		back_end.add_edge(vertex_one, vertex_two);
 	}
 	myFile.close();
-	display.action(10);
-	game.remove_edge(10);
+	front_end.action(10);//Starting position
+	back_end.remove_edge(10);//Deleting starting position
 	while (playing) {
-		display.to_string();
+		front_end.to_string();
 		cout << "Your turn" << endl;
 		cin >> player_move;
-		display.action(player_move);
-		AI_move = game.decision(player_move);
+		front_end.action(player_move);
+		AI_move = back_end.decision(player_move);
+		cout << AI_move << endl;
 		if (AI_move == -1) {
 			cout << "Computer lost" << endl;
 			playing = false;
 		}
-		display.action(AI_move);
+		front_end.action(AI_move);
+		if (back_end.player_lost(AI_move)) {
+			front_end.to_string();
+			cout << "You lost" << endl;
+			playing = false;
+		}
+		back_end.remove_edge(AI_move);
 	}
 	return 0;
 }

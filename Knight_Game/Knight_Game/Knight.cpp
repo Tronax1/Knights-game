@@ -18,29 +18,37 @@ int Knight::heuristic(int pos) {
 			ucount++;
 		}
 	}
+	if (ucount == 0)
+		return -1;
 	return ucount;
 }
 
 int Knight::decision(int curr){
 	int* counts = new int[16];
-	int position = -1;
+	int position = -1, lowest_h = 4;
 	for (int j = 0; j < 16; j++) {
-		counts[j] = 0;
+		counts[j] = -1;
 	}
 	for (int i = 0; i < 16; i++) {
 		if (board[curr][i] == 1) {
 			counts[i] = heuristic(i);
 		}
 	}
-	if (counts[0] > 0) {
-		position = 0;
-	}
-	for (int i = 1; i < 16; i++) {
-		if (counts[i] > 0 && counts[i] < counts[i - 1]) {
+	for (int i = 0; i < 16; i++) {
+		if (counts[i] > -1 && counts[i] <= lowest_h) {
 			position = i;
+			lowest_h = counts[i];
 		}
 	}
+	remove_edge(curr);
 	return position; //should analyze in main...if -1 returned, computer has lost
+}
+bool Knight::player_lost(int curr) {
+	for (int i = 0; i < 16; i++) {
+		if (board[curr][i] == 1)
+			return false;
+	}
+	return true;
 }
 void Knight::add_edge(int i, int j) {
 
