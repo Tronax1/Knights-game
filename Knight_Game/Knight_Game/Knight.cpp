@@ -11,8 +11,36 @@ Knight::Knight() {
 		}
 	}
 }
-int Knight::heuristic(int **state) {
-	return 1;
+int Knight::heuristic(int pos) {
+	int ucount = 0;
+	for (int i = 0; i < 16; i++) {
+		if (board[pos][i] == 1) {
+			ucount++;
+		}
+	}
+	return ucount;
+}
+
+int Knight::decision(int curr){
+	int* counts = new int[16];
+	int position = -1;
+	for (int j = 0; j < 16; j++) {
+		counts[j] = 0;
+	}
+	for (int i = 0; i < 16; i++) {
+		if (board[curr][i] == 1) {
+			counts[i] = heuristic(i);
+		}
+	}
+	if (counts[0] > 0) {
+		position = 0;
+	}
+	for (int i = 1; i < 16; i++) {
+		if (counts[i] > 0 && counts[i] < counts[i - 1]) {
+			position = i;
+		}
+	}
+	return position; //should analyze in main...if -1 returned, computer has lost
 }
 void Knight::add_edge(int i, int j) {
 
