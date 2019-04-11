@@ -37,8 +37,9 @@ void UI::to_string() {
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			std::cout << std::setw(3)<< board[i][j];
+			std::cout << "|";
 		}
-		std::cout <<std::endl<< std::endl;
+		std::cout <<std::endl<<"----------------"<<std::endl;
 	}
 }
 UI::~UI() {
