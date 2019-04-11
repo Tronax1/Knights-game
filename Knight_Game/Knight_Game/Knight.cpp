@@ -43,6 +43,11 @@ int Knight::decision(int curr){
 	remove_edge(curr);
 	return position; //should analyze in main...if -1 returned, computer has lost
 }
+bool Knight::is_legal_move(int prev, int curr) {
+	if (board[prev][curr] == 1)
+		return true;
+	return false;
+}
 bool Knight::player_lost(int curr) {
 	for (int i = 0; i < 16; i++) {
 		if (board[curr][i] == 1)

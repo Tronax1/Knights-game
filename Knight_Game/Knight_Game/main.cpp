@@ -10,7 +10,7 @@ int main() {
 	Knight back_end;
 	UI front_end;
 	bool playing = true;
-	int player_move, AI_move;
+	int player_move, AI_move, previous_move;
 	myFile.open("Vertices.txt");
 	int vertex_one, vertex_two;
 	if (!myFile) {
@@ -23,25 +23,31 @@ int main() {
 	}
 	myFile.close();
 	front_end.action(10);//Starting position
-	back_end.remove_edge(10);//Deleting starting position
+	previous_move = 10;
 	while (playing) {
 		front_end.to_string();
 		cout << "Your turn" << endl;
 		cin >> player_move;
-		front_end.action(player_move);
-		AI_move = back_end.decision(player_move);
-		cout << AI_move << endl;
-		if (AI_move == -1) {
-			cout << "Computer lost" << endl;
-			playing = false;
+		cout << endl;
+		if (back_end.is_legal_move(previous_move, player_move)) {
+			back_end.remove_edge(previous_move);
+			front_end.action(player_move);
+			AI_move = back_end.decision(player_move);
+			previous_move = AI_move;
+			if (AI_move == -1) {
+				cout << "Computer lost" << endl;
+				playing = false;
+			}
+			front_end.action(AI_move);
+			if (back_end.player_lost(AI_move)) {
+				front_end.to_string();
+				cout << "You lost" << endl;
+				playing = false;
+			}
 		}
-		front_end.action(AI_move);
-		if (back_end.player_lost(AI_move)) {
-			front_end.to_string();
-			cout << "You lost" << endl;
-			playing = false;
+		else {
+			cout << "Not a valid move" << endl;
 		}
-		back_end.remove_edge(AI_move);
 	}
 	return 0;
 }
