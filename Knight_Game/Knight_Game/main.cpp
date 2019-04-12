@@ -27,6 +27,7 @@ int main() {
 	starting_move = rand() % 16;
 	front_end.action(starting_move);//Starting position
 	previous_move = starting_move;
+	cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
 	while (playing) {
 		front_end.to_string();
 		cout << "Your turn"<<endl;
