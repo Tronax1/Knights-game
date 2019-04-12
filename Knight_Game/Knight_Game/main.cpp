@@ -2,15 +2,17 @@
 #include "Knight.h"
 #include <fstream>
 #include "UserInterface.h"
+#include <time.h>
 
 using namespace std;
 
 int main() {
+	srand(time(NULL));
 	ifstream myFile;
 	Knight back_end;
 	UI front_end;
 	bool playing = true;
-	int player_move, AI_move, previous_move;
+	int player_move, AI_move, previous_move, starting_move;
 	myFile.open("Vertices.txt");
 	int vertex_one, vertex_two;
 	if (!myFile) {
@@ -22,11 +24,12 @@ int main() {
 		back_end.add_edge(vertex_one, vertex_two);
 	}
 	myFile.close();
-	front_end.action(10);//Starting position
-	previous_move = 10;
+	starting_move = rand() % 16;
+	front_end.action(starting_move);//Starting position
+	previous_move = starting_move;
 	while (playing) {
 		front_end.to_string();
-		cout << "Your turn" << endl;
+		cout << "Your turn"<<endl;
 		cin >> player_move;
 		cout << endl;
 		if (back_end.is_legal_move(previous_move, player_move)) {
