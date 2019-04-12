@@ -14,6 +14,7 @@ public:
 	bool is_legal_move(int prev, int curr);
 	void add_edge(int i, int j);
 	void remove_edge(int i);
+	void delay();
 	void to_string();
 	~Knight();
 };

@@ -67,6 +67,11 @@ void Knight::remove_edge(int i) {
 	for (int l = 0; l < 16; l++) 
 		board[l][i] = 0;
 }
+void Knight::delay() {
+	for (int i = 0; i < 400000000; i++) {
+		//Timing function so it looks like the AI is moving the piece
+	}
+}
 void Knight::to_string() {
 	std::cout << " ";
 	for (int i = 0; i < 16; i++)

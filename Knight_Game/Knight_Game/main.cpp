@@ -32,11 +32,14 @@ int main() {
 		if (back_end.is_legal_move(previous_move, player_move)) {
 			back_end.remove_edge(previous_move);
 			front_end.action(player_move);
+			front_end.to_string();
+			cout << endl;
+			back_end.delay();
 			AI_move = back_end.decision(player_move);
 			previous_move = AI_move;
 			if (AI_move == -1) {
 				cout << "Computer lost" << endl;
-				playing = false;
+				return 0;
 			}
 			front_end.action(AI_move);
 			if (back_end.player_lost(AI_move)) {
