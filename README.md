@@ -19,3 +19,16 @@ the game board. An adjacent matrix was used over the list in implementation beca
 be easier to add and remove edges while playing the game. Using the adjacency matrix also
 made it possible to have the Knight start at any position in the beginning instead of having it
 start in one specific space and evaluate its decision based on a decision tree.
+## User Interface
+![UI](https://i.imgur.com/T3pvgTd.png)
+ 
+The user interface was important to display the board during in the game in an appropriate
+manner. The Knight is first placed randomly on the board. The user makes its decision on which
+square it wants to move to. Below shows a picture of the way to board looks using the User
+Interface that was designed to display the board. All the spaces on the board are numbered
+
+from zero to fifteen and the space where the Knight is placed is a K.
+## Collaborators
+- [nshamsuddin](https://github.com/nshamsuddin)
+- [csarabia31](https://github.com/csarabia31)
+- [Tronax1](https://github.com/Tronax1)
