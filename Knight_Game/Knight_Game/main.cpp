@@ -10,7 +10,7 @@ int main() {
 	srand(time(NULL));
 	ifstream myFile;
 	Knight back_end;
-	UI front_end;
+	UI board_display;
 	bool playing = true;
 	int player_move, AI_move, previous_move, starting_move;
 	myFile.open("Vertices.txt");
@@ -25,18 +25,16 @@ int main() {
 	}
 	myFile.close();
 	starting_move = rand() % 16;
-	front_end.action(starting_move);//Starting position
-	previous_move = starting_move;
 	cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+	board_display.action(starting_move);//Starting position
+	previous_move = starting_move;
 	while (playing) {
-		front_end.to_string();
 		cout << "Your turn"<<endl;
 		cin >> player_move;
 		cout << endl;
 		if (back_end.is_legal_move(previous_move, player_move)) {
 			back_end.remove_edge(previous_move);
-			front_end.action(player_move);
-			front_end.to_string();
+			board_display.action(player_move);
 			cout << endl;
 			back_end.delay();
 			AI_move = back_end.decision(player_move);
@@ -45,9 +43,8 @@ int main() {
 				cout << "Computer lost" << endl;
 				return 0;
 			}
-			front_end.action(AI_move);
+			board_display.action(AI_move);
 			if (back_end.player_lost(AI_move)) {
-				front_end.to_string();
 				cout << "You lost" << endl;
 				playing = false;
 			}

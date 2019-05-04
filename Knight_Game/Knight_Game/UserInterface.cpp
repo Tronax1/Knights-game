@@ -14,24 +14,18 @@ UI::UI() {
 	}
 }
 void UI::action(int move) {
-	int x = 0, y = 0;
 	for (int i = 0; i < 4; i++) {
 		for (int j = 0; j < 4; j++) {
 			if (board[i][j] == std::to_string(move)) {
 				board[i][j] = "K";
-				x = i;
-				y = j;
+				prev_x = i;
+				prev_y = j;
 				break;
 			}
 		}
 	}
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 4; j++) {
-			if (board[i][j] == "K" && i != x && j != y) {
-				board[i][j] = " ";
-			}
-		}
-	}
+	to_string();
+	board[prev_x][prev_y] = " ";
 }
 void UI::to_string() {
 	std::cout << "----------------" << std::endl;
